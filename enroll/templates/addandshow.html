@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+<div class="col-sm-4">
+    <h4 class="text-center alert alert-info">ADD NEW STUDENT</h4>
+<form method="POST">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Add" class="btn btn-success">
+</form>
+</div>
+
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">SHOW STUDENT INFORMATION</h4>
+        {%if stu%}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">FIRST_NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">PASSWORD</th>
+              <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+    {%for st in stu%}
+  <tbody>
+    <tr>
+      <th scope="row">{{st.id}}</th>
+      <td>{{st.name}}</td>
+      <td>{{st.email}}</td>
+      <td>{{st.password}}</td>
+              <td>
+                  <a href="{%url 'update_data' st.id%} " class="btn btn-warning btn-sm">EDIT</a>
+<form method="post" action="{%url 'delete_data' st.id%}" class="d-inline">
+    {%csrf_token%}
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+              </td>
+
+    </tr>
+
+  </tbody>
+    {%endfor%}
+</table>
+        {%else%}
+        <h4 class="text-center alert alert-warning">no records</h4>
+        {%endif%}
+    </div>
+
+</div>
+
+{%endblock content%}

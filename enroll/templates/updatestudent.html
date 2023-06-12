@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div clas="row">
+    <div class="col-sm-8 offset-2">
+        <h4 class="alert alert-info">UPDATE STUDENT INFORMATION</h4>
+    <form acion="" method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input type="submit" value="update" class="btn btn-success">
+    <a class="btn btn-info" href="{%url 'add_show'%}">BACK TO HOME</a>
+    </form>
+    </div>
+</div>
+{%endblock content%}
